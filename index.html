@@ -11,31 +11,61 @@
       <!-- TODO: Buatlah sebuah header dengan id todo-title -->
       <!-- TODO: Buatlah sebuah subtitle dengan id todo-subtitle -->
 
+      <h1 id="todo-title">To-Do List</h1>
+      <p id="todo-subtitle">Today I Need To</p>
+
       <!-- Section: input -->
       <!-- TODO: Buatlah sebuah input bertipe text dengan id todo-input -->
       <!-- TODO: Buatlah sebuah button dengan id todo-submit -->
 
+      <input type="text" id="todo-input" />
+      <button type="button" id="todo-submit">Submit</button>
+
       <!-- Section output -->
       <!-- TODO: Buatlah sebuah <ul> dengan id todo-output -->
+      <li>
+        <ul id="todo-output"></ul>
+      </li>
     </div>
 
     <!-- ! Untuk tantangan ini, script jangan diubah ke external js yah ! -->
     <script>
       // TODO: Deklarasi variable sesuai dengan kebutuhan di sini
-      let button;
-      let input;
-      let output;
+      let button = document.querySelector("#todo-submit");
+      let input = document.querySelector("#todo-input");
+      let output = document.querySelector("#todo-output");
 
       // TODO: Buatlah sebuah fungsi dengan nama fnClickHandler
       // Fungsi yang digunakan untuk menambahkan tulisan
       // Jangan ubah cara deklarasi fungsinya, cukup isi saja
-      function fnClickHandler(toDoItem) {}
+      function fnClickHandler(toDoItem) {
+        output.appendChild(createList(toDoItem));
+      }
+
+      function createList(name) {
+        let li = document.createElement("li");
+        li.textContent = name;
+        li.className = "list-item";
+        return li;
+      }
 
       // TODO: register event onclick / addEventListener untuk button
       // akan menjalankan fungsi fnClickHandler
-      
+      button.addEventListener("click", () => {
+        const isi = input.value;
+        fnClickHandler(isi);
+        input.value = "";
+      });
+
       // TODO: register event onkeypress / addEventListener untuk input
       // sehingga saat di input ditekan enter akan menjalankan fungsi fnClickHandler juga
+      input.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+          const isi = input.value;
+          fnClickHandler(isi);
+          input.value = "";
+        }
+      });
     </script>
   </body>
 </html>
